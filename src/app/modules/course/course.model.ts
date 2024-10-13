@@ -78,16 +78,16 @@ const courseSchema = new Schema<TCourse>({
   },
 });
 
-courseSchema.pre("save", async function (next) {
-  if (this.startDate && this.endDate) {
-    const startDate = new Date(this.startDate);
-    const endDate = new Date(this.endDate);
-    const durationInWeeks = Math.ceil(
-      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 7)
-    );
-    this.durationInWeeks = durationInWeeks;
-  }
-  next();
-});
+// courseSchema.pre("save", async function (next) {
+//   if (this.startDate && this.endDate) {
+//     const startDate = new Date(this.startDate);
+//     const endDate = new Date(this.endDate);
+//     const durationInWeeks = Math.ceil(
+//       (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 7)
+//     );
+//     this.durationInWeeks = durationInWeeks;
+//   }
+//   next();
+// });
 
 export const Course = model<TCourse>("Course", courseSchema);
