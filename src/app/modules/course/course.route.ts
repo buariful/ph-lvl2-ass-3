@@ -11,4 +11,6 @@ router.post(
   catchAsync(CourseController.createCoruse)
 );
 
+router.get("/courses", catchAsync(CourseController.getCourses));
+
 export const CourseRouter = router;
