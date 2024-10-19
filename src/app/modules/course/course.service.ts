@@ -120,6 +120,7 @@ const getCourseWithReviewsFromDB = async (courseId: string) => {
 };
 
 const getBestCourseOnAverageRatingFromDB = async () => {
+  /*************  ✨ Codeium Command 🌟  *************/
   const result = await Course.aggregate([
     {
       $lookup: {
@@ -135,14 +136,42 @@ const getBestCourseOnAverageRatingFromDB = async () => {
     {
       $group: {
         _id: "$_id",
+        course: {
+          $first: {
+            _id: "$_id",
+            title: "$title",
+            instructor: "$instructor",
+            categoryId: "$categoryId",
+            price: "$price",
+            tags: "$tags",
+            startDate: "$startDate",
+            endDate: "$endDate",
+            language: "$language",
+            provider: "$provider",
+            durationInWeeks: "$durationInWeeks",
+            details: "$details",
+          },
+        },
         averageRating: {
           $avg: "$reviews.rating",
         },
+        reviewCount: {
+          $sum: 1,
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        course: 1,
+        averageRating: 1,
+        reviewCount: 1,
       },
     },
   ]);
+  /******  9928a5c3-5191-47d2-b182-270f38d7dbb4  *******/
 
-  return result;
+  return result[0] ?? {};
 };
 
 export const CourseService = {
