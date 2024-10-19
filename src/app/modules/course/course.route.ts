@@ -13,4 +13,6 @@ router.post(
 
 router.get("/courses", catchAsync(CourseController.getCourses));
 
+router.put("/courses/:courseId", catchAsync(CourseController.updateCourse));
+
 export const CourseRouter = router;
