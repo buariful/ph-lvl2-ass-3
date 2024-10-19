@@ -86,6 +86,7 @@ class CourseQueryBuilder<T> {
     delete queryObj["tags"];
     delete queryObj["level"];
 
+    // eslint-disable-next-line no-console
     console.log(queryObj);
 
     this.modelQuery = this.modelQuery.find(queryObj);
