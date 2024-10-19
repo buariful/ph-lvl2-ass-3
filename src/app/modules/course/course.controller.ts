@@ -52,9 +52,21 @@ const getSingleCourseWithReview: RequestHandler = async (req, res) => {
   });
 };
 
+const getBestCourse: RequestHandler = async (req, res) => {
+  const result = await CourseService.getBestCourseOnAverageRatingFromDB();
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Course retrived successfully",
+    data: result,
+  });
+};
+
 export const CourseController = {
   createCoruse,
   getCourses,
   updateCourse,
   getSingleCourseWithReview,
+  getBestCourse,
 };

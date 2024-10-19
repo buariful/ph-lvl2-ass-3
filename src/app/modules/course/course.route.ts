@@ -20,4 +20,6 @@ router.get(
   catchAsync(CourseController.getSingleCourseWithReview)
 );
 
+router.get("/course/best", catchAsync(CourseController.getBestCourse));
+
 export const CourseRouter = router;
