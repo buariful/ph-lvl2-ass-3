@@ -15,4 +15,9 @@ router.get("/courses", catchAsync(CourseController.getCourses));
 
 router.put("/courses/:courseId", catchAsync(CourseController.updateCourse));
 
+router.get(
+  "/courses/:courseId/reviews",
+  catchAsync(CourseController.getSingleCourseWithReview)
+);
+
 export const CourseRouter = router;

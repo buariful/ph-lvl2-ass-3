@@ -99,8 +99,29 @@ const updatedCourseInDB = async (payload: Partial<TCourse>, id: string) => {
   }
 };
 
+const getCourseWithReviewsFromDB = async (courseId: string) => {
+  const result = await Course.aggregate([
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(courseId),
+      },
+    },
+    {
+      $lookup: {
+        from: "reviews",
+        localField: "_id",
+        foreignField: "courseId",
+        as: "reviews",
+      },
+    },
+  ]);
+
+  return result;
+};
+
 export const CourseService = {
   insertCourseIntoDB,
   getCoursesFromDB,
   updatedCourseInDB,
+  getCourseWithReviewsFromDB,
 };
